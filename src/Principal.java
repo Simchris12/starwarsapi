@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Principal {
@@ -10,10 +11,12 @@ public class Principal {
             var numeroDePelicula = Integer.valueOf(lectura.nextLine());
             Pelicula pelicula = consulta.buscaPelicula(numeroDePelicula);
             System.out.println(pelicula);
+            GeneradorDeArchivo generador = new GeneradorDeArchivo();
+            generador.guardarJson(pelicula);
         }catch (NumberFormatException e){
             System.out.println("Número inválido. Por favor, ingrese un número entre 1 y 6." + e.getMessage());
         }
-        catch (RuntimeException e ){
+        catch (RuntimeException | IOException e ){
             System.out.println(e.getMessage());
             System.out.println("Finalizando la aplicación");
         }
